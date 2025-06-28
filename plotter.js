@@ -3,18 +3,18 @@
 
 //----------これより下は変更しない----------//
 
-function pbeginShape(){
+export function pbeginShape(){
   beginShape();
   vactive    = true;
   firstPoint = true;
 }
 
-function pendShape(){
+export function pendShape(){
   endShape();
   vactive = false;
 }
 
-function pvertex(x, y) {
+export function pvertex(x, y) {
   // ① 画面に描く
   vertex(x, y);
   if (!vactive) return;
@@ -38,14 +38,14 @@ function pvertex(x, y) {
 }
 
 
-function pline(x1, y1, x2, y2){
+export function pline(x1, y1, x2, y2){
   pbeginShape();
     pvertex(x1, y1);
     pvertex(x2, y2);
   pendShape();
 }
 
-function prect(x, y, w, h){
+export function prect(x, y, w, h){
   pbeginShape();
     pvertex(x    , y    );
     pvertex(x + w, y    );
@@ -55,7 +55,7 @@ function prect(x, y, w, h){
   pendShape();
 }
 
-function pellipse(cx, cy, w, h, detail = 180){
+export function pellipse(cx, cy, w, h, detail = 180){
   pbeginShape();
     for (let i = 0; i <= detail; i++){
       let a = map(i, 0, detail, 0, TWO_PI);
@@ -66,7 +66,7 @@ function pellipse(cx, cy, w, h, detail = 180){
   pendShape();
 }
 
-function buttonSetting(){
+export function buttonSetting(){
   let btn = createButton("Send to Plotter");
   btn.mousePressed(writeData);
   btn.style('border-radius','5px');
@@ -78,7 +78,7 @@ function buttonSetting(){
   btn.style('color','#fff');
 }
 
-async function connectUSB(){
+export async function connectUSB(){
   try {
     usbDevice = await navigator.usb.requestDevice({ filters: [] });
     await usbDevice.open();
@@ -91,7 +91,7 @@ async function connectUSB(){
   }
 }
 
-async function writeData(){
+export async function writeData(){
   const hdr = "IN;PA;!ST1,0;";
   const ftr = "PU0,0;";
   const data = hdr + hpglMain + ftr;
