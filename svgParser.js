@@ -1,6 +1,10 @@
 // ===== svgParser.js =====
 // p5.js Editor の別タブ「svgParser.js」に配置
 
+export const testFunction = function(x, y, z){
+  return x*y*z;
+}
+
 // --- SVG パース／ユーティリティ関数 ---
 export function approximateBezier(p0, p1, p2, p3, segments = 50) {
   const points = [];
@@ -22,7 +26,7 @@ export function removeDuplicatePoints(path) {
   return path.filter((pt, i, arr) => i === 0 || pt.x !== arr[i - 1].x || pt.y !== arr[i - 1].y);
 }
 
-export function parseSVGPath(d) {
+export const parseSVGPath = function (d) {
   const cmds = d.match(/[MmLlHhVvCcSsQqTtAaZz]|-?\d+(?:\.\d+)?/g);
   if (!cmds) return [];
 
